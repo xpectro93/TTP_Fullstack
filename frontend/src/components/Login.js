@@ -59,4 +59,4 @@ const Login = ({ history }) => {
   );
 };
 
-export default withRoRouter(Login);
+export default withRouter(Login);
