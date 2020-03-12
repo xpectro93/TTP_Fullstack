@@ -1,16 +1,18 @@
 const { one } = require('./index.js');
 
 const createUser =async ( req, res, next ) => {
+  console.log(req.body)
   try {
     const newUser = await one (
-      'INSERT INTO users (uid, username, email, balance) VALUES (${uid},${username},${email}, ${balance}) RETURNING *'
+      'INSERT INTO users (uid, username, email) VALUES (${uid},${username},${email}) RETURNING *',req.body
     );
     res.status (200).json({
       message: 'New User has been added',
       newUser
     })
-  } catch ( err ) {
-    next(err)
+  } catch (err) {
+    console.log(err)
+    next(err.message = 'yikes')
   }
 }
 

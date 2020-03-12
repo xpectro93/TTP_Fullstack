@@ -1,6 +1,6 @@
 const admin = require('./firebase.js');
 
-const testTokenFunction = async (req, res, next) => {
+const checkIsValidUser = async (req, res, next) => {
   const { token } = req.body;
   try {
     let decodedToken = await admin.auth().verifyIdToken(token);
@@ -14,5 +14,5 @@ const testTokenFunction = async (req, res, next) => {
 }
 
 module.exports = {
-  testTokenFunction
+  checkIsValidUser
 }

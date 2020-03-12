@@ -8,21 +8,24 @@ const SignUp = ({history}) => {
   const handleSignUp = useCallback (
     async event => {
       event.preventDefault ();
-      const {email, password, confirmPassword, subBtn } = event.target.elements;
+      const {email, password, confirmPassword, subBtn, username } = event.target.elements;
       try {
 
+        console.log('new user details', email.value, password.value, username.value);
+       
+        if(checkValues(password,confirmPassword)){
+          let res = await firebase
+          .auth ()
+          .createUserWithEmailAndPassword (email.value, password.value);
+          let createUser = await axios.post('http://localhost:3001/api/users/',{
+            uid:res.user.uid,
+            email:email.value,
+            username:username.value,
 
-        let res = await firebase
-        .auth ()
-        .createUserWithEmailAndPassword (email.value, password.value);
-        // let createUser = await axios.post('http://localhost:3001/api/users/',{})
-        history.push ('/');
-        // if(checkValues(password,confirmPassword)){
+          })
+          history.push ('/');
+        }
 
-        // }
-
-
-        
       } catch (error) {
         alert (error);
       }
@@ -36,7 +39,7 @@ const SignUp = ({history}) => {
       <h1>Sign up</h1>
       <form onSubmit={handleSignUp}>
        
-        
+          <input name="username" type='text' placeholder="Username"/>
           <input name="email" type="email" placeholder="Email" />
           <input name="password" type="password" placeholder="Password" />
           <input name="confirmPassword" type="password" placeholder="Confirm Password" />

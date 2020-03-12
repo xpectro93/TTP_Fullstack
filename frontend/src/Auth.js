@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebase from "./firebase.js";
+import axios from 'axios';
 
 export const AuthContext = React.createContext();
 

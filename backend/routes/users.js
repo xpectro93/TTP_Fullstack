@@ -1,9 +1,18 @@
-const admin = require("firebase-admin");
+const users = require('express').Router();
+const { checkIsValidUser } = require('../utils/utils')
+const {
+  createUser,
+  getUser
+} = require('../db/queries/userQueries.js');
 
-const serviceAccount = require("../secret.json");
+//create user
+users.post('/new', createUser);
 
-admin.initializeApp({
-  credential:admin.credential.cert(serviceAccount),
-  databaseURL: "https://stonks-d0e0b.firebaseio.com"
+//check if user exists;
+users.post('/test', checkIsValidUser,(req, res, next)=> {
+  res.json({
+    message:'User exists, now u may login'
+  });
 });
-module.exports = admin;
+
+module.exports = users;

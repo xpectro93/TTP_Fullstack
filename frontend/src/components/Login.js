@@ -15,8 +15,9 @@ const Login = ({ history }) => {
           .signInWithEmailAndPassword(email.value, password.value);
           //res can be obtained by => res.user.uid
           let token = await firebase.auth().currentUser.getIdToken(false);
+          console.log('this is token, ',token)
           token = {token:token}
-          let testResp = await axios.post('http://localhost:3001/api/users/test',token )
+          let testResp = await axios.post('http://localhost:3001/api/users/test',token)
           console.log('This is tesResp => ', testResp)
          //this token can b stored and sent to the backend to allow user to use route/ query that is protected by middleware;token is a obj
 
