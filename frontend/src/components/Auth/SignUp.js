@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {withRouter} from 'react-router';
-import firebase from '../firebase.js';
+import firebase from './firebase.js';
 import axios from 'axios';
 const checkValues = (input1, input2) => input1.value === input2.value ? true : false
 const SignUp = ({history}) => {

@@ -1,13 +1,14 @@
 import React, {useState, useEffect, useContext} from "react";
 import { Redirect } from 'react-router'
-import firebase from "../../firebase";
-import { AuthContext } from "../../Auth.js";
+import firebase from "../Auth/firebase";
+import { AuthContext } from "../Auth/Auth.js";
 import axios from 'axios';
+import PurchaseForm from './PurchaseForm.js'
 const secret = require('../../secret.json')
 
 const Portfolio = () => {
   const { currentUser } = useContext(AuthContext);
-  let [ user, setUser ] = useState();
+  const [ user, setUser ] = useState();
 
   //retrieves current user from backend;
   const getUser = async userId => {
@@ -31,13 +32,12 @@ const Portfolio = () => {
     return (
       <>
     <h1>{user.username}</h1>
-    <h2>{user.uid}</h2>
-    <h2>{user.balance}</h2>
     <h2>{user.email}</h2>
+    <PurchaseForm balance={user.balance}/>
     <button onClick={() => firebase.auth().signOut()}>Sign out</button>
       </>
     )
-  }else {
+  } else {
     return <Redirect to="/portfolio" />;
   }
   

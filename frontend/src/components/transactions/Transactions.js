@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from "react";
 import { Redirect } from 'react-router'
-import firebase from "../../../firebase";
-import { AuthContext } from "../../../Auth.js";
+import firebase from "../Auth/firebase";
+import { AuthContext } from "../Auth/Auth.js";
 import axios from 'axios';
 const secret = require('../../secret.json')
 
@@ -31,7 +31,6 @@ const Transactions = () => {
       <>
         <h1>{user.username}</h1>
         <h2>{user.uid}</h2>
-        <h2>{user.balance}</h2>
         <h2>{user.email}</h2>
         <button onClick={() => firebase.auth().signOut()}>Sign out</button>
       </>

@@ -1,6 +1,6 @@
 import fb from 'firebase/app';
 import 'firebase/auth';
-const secret = require('./secret.json')
+const secret = require('../../secret.json')
 
 const firebase = fb.initializeApp({
     apiKey: secret.apiKey,
