@@ -20,7 +20,7 @@ const Portfolio = () => {
       <>
     <h1>{currentUser.info.username}</h1>
     <h2>{currentUser.info.email}</h2>
-    <PurchaseForm balance={200}/>
+    <PurchaseForm balance={200} uid={currentUser.uid}/>
     <button onClick={() => firebase.auth().signOut()}>Sign out</button>
       </>
     )
