@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import firebase from "./firebase.js";
-import axios from 'axios';
 
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(setCurrentUser);
+    //cb funtion that returns the current user, then state is set
+    firebase.auth().onAuthStateChanged(setCurrentUser);  
   }, []);
 
   return (

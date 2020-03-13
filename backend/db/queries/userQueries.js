@@ -23,8 +23,7 @@ const getUser = async ( req, res, next ) => {
 
     res.status (200).json ({
       message:'User has been retrieved',
-      user,
-      uid
+      user
     });
 
   } catch (err) {

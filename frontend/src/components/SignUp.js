@@ -8,7 +8,7 @@ const SignUp = ({history}) => {
   const handleSignUp = useCallback (
     async event => {
       event.preventDefault ();
-      const {email, password, confirmPassword, subBtn, username } = event.target.elements;
+      const {email, password, confirmPassword, username } = event.target.elements;
       try {
 
         console.log('new user details', email.value, password.value, username.value);
@@ -17,13 +17,16 @@ const SignUp = ({history}) => {
           let res = await firebase
           .auth ()
           .createUserWithEmailAndPassword (email.value, password.value);
-          let createUser = await axios.post('http://localhost:3001/api/users/',{
+          let createUser = await axios.post('/api/users/new',{
             uid:res.user.uid,
             email:email.value,
             username:username.value,
 
           })
+          console.log('create user',createUser)
           history.push ('/');
+        }else{
+          alert('Passwords did not match')
         }
 
       } catch (error) {

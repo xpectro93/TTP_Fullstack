@@ -7,7 +7,7 @@ const {
 
 //create user
 users.post('/new', createUser);
-
+users.get('/:uid', getUser);
 //check if user exists;
 users.post('/test', checkIsValidUser,(req, res, next)=> {
   res.json({
