@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { useInput } from '../../util/customHooks.js'
 import { getTickerInfo , postNewTransaction } from '../../util/util.js'
-import axios from 'axios';
-const PurchaseForm = ({balance, uid}) => {
+const PurchaseForm = ({balance, uid, refreshUser}) => {
   const shares = useInput(0);
   const tickerSymbol = useInput("aapl");
   const [hasError, setHasError ] = useState(false);
@@ -38,10 +37,8 @@ const PurchaseForm = ({balance, uid}) => {
       errorArray.push("Invalid Symbol")
     }
     finally{
-      console.log('b',hasError)
       //if error array length is 0 then make req
       if(!errorArray.length){
-        console.log(hasError)
         postTransaction(tickerInfo)
       }else{
         //else display errors
@@ -66,7 +63,9 @@ const PurchaseForm = ({balance, uid}) => {
     }
     console.log(transactionObj)
     try {
-      let transactionResp = await postNewTransaction(transactionObj);
+       await postNewTransaction(transactionObj);
+       await refreshUser()
+       console.log('refresh was called')
     } catch (err) {
       console.log(err)
     }

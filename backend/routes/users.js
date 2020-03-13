@@ -6,7 +6,7 @@ const {
 } = require('../db/queries/userQueries.js');
 
 //create user
-users.post('/new', createUser);
+users.post('/new', checkIsValidUser,createUser);
 
 //get user info from database;
 users.post('/:uid', checkIsValidUser,getUser);
