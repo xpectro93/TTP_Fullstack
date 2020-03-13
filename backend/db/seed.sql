@@ -9,7 +9,6 @@ CREATE TABLE users (
   username VARCHAR NOT NULL UNIQUE,
   email VARCHAR NOT NULL UNIQUE,
   balance FLOAT NOT NULL DEFAULT 5000
-
 );
 
 CREATE TABLE transactions (

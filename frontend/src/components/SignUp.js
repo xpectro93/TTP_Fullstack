@@ -10,20 +10,17 @@ const SignUp = ({history}) => {
       event.preventDefault ();
       const {email, password, confirmPassword, username } = event.target.elements;
       try {
-
-        console.log('new user details', email.value, password.value, username.value);
        
         if(checkValues(password,confirmPassword)){
           let res = await firebase
           .auth ()
           .createUserWithEmailAndPassword (email.value, password.value);
-          let createUser = await axios.post('/api/users/new',{
+          await axios.post('/api/users/new',{
             uid:res.user.uid,
             email:email.value,
             username:username.value,
 
           })
-          console.log('create user',createUser)
           history.push ('/');
         }else{
           alert('Passwords did not match')
@@ -46,8 +43,6 @@ const SignUp = ({history}) => {
           <input name="email" type="email" placeholder="Email" />
           <input name="password" type="password" placeholder="Password" />
           <input name="confirmPassword" type="password" placeholder="Confirm Password" />
-
-        
         <button name='subBtn' type="submit">Sign Up</button>
       </form>
     </div>

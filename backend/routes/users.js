@@ -7,12 +7,7 @@ const {
 
 //create user
 users.post('/new', createUser);
-users.get('/:uid', getUser);
-//check if user exists;
-users.post('/test', checkIsValidUser,(req, res, next)=> {
-  res.json({
-    message:'User exists, now u may login'
-  });
-});
+users.post('/:uid', checkIsValidUser,getUser);
+
 
 module.exports = users;
