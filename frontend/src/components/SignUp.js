@@ -21,7 +21,7 @@ const SignUp = ({history}) => {
             username:username.value,
 
           })
-          history.push ('/');
+          history.push ('/portfolio');
         }else{
           alert('Passwords did not match')
         }

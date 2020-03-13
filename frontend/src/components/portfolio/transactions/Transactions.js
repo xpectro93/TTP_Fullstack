@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useContext} from "react";
 import { Redirect } from 'react-router'
-import firebase from "../firebase";
-import { AuthContext } from "../Auth.js";
+import firebase from "../../../firebase";
+import { AuthContext } from "../../../Auth.js";
 import axios from 'axios';
-const secret = require('../secret.json')
+const secret = require('../../secret.json')
 
-const Home = () => {
+const Transactions = () => {
   const { currentUser } = useContext(AuthContext);
   let [ user, setUser ] = useState();
 
@@ -29,15 +29,15 @@ const Home = () => {
   if(user){
     return (
       <>
-      <h1>{user.username}</h1>
-    <h2>{user.uid}</h2>
-    <h2>{user.balance}</h2>
-    <h2>{user.email}</h2>
-    <button onClick={() => firebase.auth().signOut()}>Sign out</button>
+        <h1>{user.username}</h1>
+        <h2>{user.uid}</h2>
+        <h2>{user.balance}</h2>
+        <h2>{user.email}</h2>
+        <button onClick={() => firebase.auth().signOut()}>Sign out</button>
       </>
     )
   }else {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
   
 };
@@ -45,4 +45,4 @@ const Home = () => {
 
 
 
-export default Home;
+export default Transactions;
