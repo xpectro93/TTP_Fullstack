@@ -6,7 +6,7 @@ const port = 3001;
 
 const index = require('./routes/index.js');
 const users = require('./routes/users.js');
-// const transactions = require('/routes/transactions.js');
+const transactions = require('./routes/transactions.js');
 
 const app = express();
 
@@ -15,8 +15,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended :false}));
 app.use(bodyParser.json());
 
+
+//Routes
 app.use('/api/', index);
 app.use('/api/users', users);
+app.use('/api/transactions', transactions);
 
 
 //error handling;

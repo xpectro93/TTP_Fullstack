@@ -7,6 +7,8 @@ const {
 
 //create user
 users.post('/new', createUser);
+
+//get user info from database;
 users.post('/:uid', checkIsValidUser,getUser);
 
 

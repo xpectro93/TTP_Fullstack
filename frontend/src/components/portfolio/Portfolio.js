@@ -21,7 +21,8 @@ const Portfolio = () => {
     let resp = await axios.get(`https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${secret.apiToken}`);
     console.log('thisker', resp)
   }
-//keys of interest high, low,
+//keys of interest 
+// high, low,close, open, companyName, symbol, latestPrice, volume
   useEffect(()=> {
     getUser(currentUser.uid)
     testApi('FNB')
@@ -29,7 +30,7 @@ const Portfolio = () => {
   if(user){
     return (
       <>
-      <h1>{user.username}</h1>
+    <h1>{user.username}</h1>
     <h2>{user.uid}</h2>
     <h2>{user.balance}</h2>
     <h2>{user.email}</h2>
