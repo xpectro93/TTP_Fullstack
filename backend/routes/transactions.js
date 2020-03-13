@@ -5,11 +5,13 @@ const {
   createTransaction
 } = require('../db/queries/transactionQueries.js');
 
+//create new transaction;
+transactions.post('/new/:uid', createTransaction);
+
 //get all transactions by user;
 transactions.post('/:uid',checkIsValidUser, getAllUserTransactions);
 
-//create new transaction;
-transactions.post('/new/:uid', checkIsValidUser,createTransaction);
+
 
 
 module.exports = transactions;

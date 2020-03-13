@@ -17,30 +17,34 @@ const getAllUserTransactions = async (req, res, next) => {
 };
 
 const createTransaction = async (req, res, next) => {
+
   const newBalance = {
     balance: req.body.newBalance,
-    uid: req.body.uid,
+    uid: req.params.uid,
   };
   const newTransaction = {
-    uid: req.body.uid,
+    uid: req.params.uid,
     ticker_symbol: req.body.ticker_symbol,
     transaction_type: req.body.transaction_type,
     shares: req.body.shares,
     price: req.body.price,
   };
   try {
-    await none ('UPDATE users SET balance = $1 WHERE uid = $2', [
-      newBalance,
-      newTransaction.uid,
+    let first = await none ('UPDATE users SET balance = $1 WHERE uid = $2', [
+      newBalance.balance,
+      newBalance.uid
     ]);
-    await none (
-      'INSERT INTO transactions (uid, ticker_symbol, transaction_type, shares, price)',
+   
+    let second = await none (
+      'INSERT INTO transactions (uid, ticker_symbol, transaction_type, shares, price) VALUES (${uid},${ticker_symbol}, ${transaction_type}, ${shares}, ${price})',
       newTransaction
     );
+    console.log(first,second)
     res.status (200).json ({
-      message: 'Create new transactions',
+      message: 'Created new transactions',
     });
   } catch (err) {
+    console.log('ERROR HAPPENS HERE =>', err)
     next (err);
   }
 };

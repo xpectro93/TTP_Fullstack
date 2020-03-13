@@ -1,29 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import { useInput } from '../../util/customHooks.js'
-import { getTickerInfo } from '../../util/util.js'
+import { getTickerInfo , postNewTransaction } from '../../util/util.js'
 import axios from 'axios';
-const PurchaseForm = ({balance}) => {
+const PurchaseForm = ({balance, uid}) => {
   const shares = useInput(0);
   const tickerSymbol = useInput("aapl");
   const [hasError, setHasError ] = useState(false);
   const [errorList, setErrorList ] = useState([])
-  const handleSubmit = async e => {
+
+  //check valid input
+  const handleSubmitCheck = async e => {
     e.preventDefault();
     let errorArray = [];
-    ;
+    let tickerInfo ={};
     try {
       setHasError(false)
       let info = await getTickerInfo(tickerSymbol.value);
-
+      // check if number
       if(isNaN(shares.value)){
         errorArray.push("Enter a  number")
       }else{
+        // check if int
         if(!Number.isInteger(Number(shares.value))){
           errorArray.push("Cannot buy fractions of  a share")
         }
-        const price = info.data.latestPrice
-        const cost = price * shares.value;
-        if(balance - cost <= 0){
+         tickerInfo.price = info.data.latestPrice
+         tickerInfo.cost = tickerInfo.price * shares.value;
+
+        //check if enough balance
+        if(balance - tickerInfo.cost <= 0){
           errorArray.push("Not enough cash")
         }
       }
@@ -34,27 +39,38 @@ const PurchaseForm = ({balance}) => {
     }
     finally{
       console.log('b',hasError)
+      //if error array length is 0 then make req
       if(!errorArray.length){
         console.log(hasError)
-        postTransaction()
+        postTransaction(tickerInfo)
       }else{
+        //else display errors
         setHasError(true)
         setErrorList(errorArray)
       }
     }
     
   }
-  const postTransaction = async() => {
-    console.log('we here')
+  //transaction request
+  const postTransaction = async(info) => {
+    
+    let newBal = balance - info.cost;
+    newBal = newBal.toFixed(2);
     let transactionObj = {
-      newBalance: 1,
-      uid:0,
-      ticker_symbol:'symbol',
+      newBalance: Number(newBal) ,
+      uid:uid,
+      ticker_symbol:tickerSymbol.value.toUpperCase(),
       transaction_type:'BUY',
-      shares:'shares',
-      price:'1000'
+      shares: shares.value,
+      price:info.price
     }
-    // let transaction = await axios.post()
+    console.log(transactionObj)
+    try {
+      let transactionResp = await postNewTransaction(transactionObj);
+    } catch (err) {
+      console.log(err)
+    }
+    
   }
 
  
@@ -66,7 +82,7 @@ const PurchaseForm = ({balance}) => {
 
   return (
   <>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmitCheck}>
       <h1>Cash: {balance}</h1>
       <label>
           Ticker Symbol

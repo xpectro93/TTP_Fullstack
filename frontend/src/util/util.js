@@ -16,3 +16,11 @@ export const getTickerInfo = async ticker => {
   let resp = await axios.get(`https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${secret.apiToken}`);
   return resp
 }
+
+export const postNewTransaction = async newTransaction => {
+  let token = await firebase.auth ().currentUser.getIdToken (false);
+  newTransaction.token = {token: token};
+  console.log('new',newTransaction)
+  let resp = await axios.post(`api/transactions/new/${newTransaction.uid}`, newTransaction)
+  return resp;
+}

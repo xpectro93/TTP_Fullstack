@@ -2,6 +2,7 @@ const admin = require('./firebase.js');
 
 const checkIsValidUser = async (req, res, next) => {
   const { token } = req.body;
+
   try {
     let decodedToken = await admin.auth().verifyIdToken(token);
     let uid = decodedToken.uid;
