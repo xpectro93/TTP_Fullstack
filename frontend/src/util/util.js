@@ -13,14 +13,19 @@ export const setUpUser = async userId => {
   }
 };
 export const getTickerInfo = async ticker => {
-  let resp = await axios.get(`https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${secret.apiToken}`);
-  return resp
+  return await axios.get(`https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${secret.apiToken}`);
+
 }
 
 export const postNewTransaction = async newTransaction => {
   let token = await firebase.auth ().currentUser.getIdToken (false);
   newTransaction.token = {token: token};
   console.log('new',newTransaction)
-  let resp = await axios.post(`api/transactions/new/${newTransaction.uid}`, newTransaction)
-  return resp;
+  return await axios.post(`api/transactions/new/${newTransaction.uid}`, newTransaction)
+}
+
+export const getAllTransactions = async uid => {
+  let token = await firebase.auth ().currentUser.getIdToken (false);
+  token = {token: token};
+  return await axios.post(`api/transactions/${uid}`,token)
 }

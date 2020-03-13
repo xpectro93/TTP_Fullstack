@@ -39,7 +39,7 @@ const createTransaction = async (req, res, next) => {
       'INSERT INTO transactions (uid, ticker_symbol, transaction_type, shares, price) VALUES (${uid},${ticker_symbol}, ${transaction_type}, ${shares}, ${price})',
       newTransaction
     );
-    console.log(first,second)
+
     res.status (200).json ({
       message: 'Created new transactions',
     });

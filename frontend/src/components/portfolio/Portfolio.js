@@ -1,17 +1,40 @@
-import React, { useContext} from "react";
+import React, { useContext, useState, useEffect} from "react";
 import { Redirect } from 'react-router'
 import firebase from "../Auth/firebase";
 import { AuthContext } from "../Auth/Auth.js";
+import { getAllTransactions } from "../../util/util";
 import PurchaseForm from './PurchaseForm.js'
+
 
 
 const Portfolio = () => {
   const { currentUser } = useContext(AuthContext);
   const { refreshUser } = useContext(AuthContext);
- 
-//keys of interest 
-// high, low,close, open, companyName, symbol, latestPrice, volume
-  if(currentUser){
+  const [portfolio , setPortfolio ] = useState([]);
+
+  const setUpTransactions = async () => {
+    let transactionList = await getAllTransactions(currentUser.info.uid);
+    let transactionObj = {}
+      transactionList.data.transactions.forEach(transaction => {
+        if(transactionObj[transaction.ticker_symbol]){
+          transactionObj[transaction.ticker_symbol]['shares']+= transaction.shares
+        }else {
+          transactionObj[transaction.ticker_symbol] = {
+            shares  :transaction.shares,
+            price:transaction.price
+          }
+        }
+        
+      });
+      setPortfolio(transactionObj)
+
+  }
+
+
+  useEffect(()=> {
+    setUpTransactions(currentUser.info.uid)
+  },[currentUser.info.balance])
+  if(currentUser.info && currentUser.info.uid){
     return (
       <>
     <h1>{currentUser.info.username}</h1>

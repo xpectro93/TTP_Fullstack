@@ -65,7 +65,6 @@ const PurchaseForm = ({balance, uid, refreshUser}) => {
     try {
        await postNewTransaction(transactionObj);
        await refreshUser()
-       console.log('refresh was called')
     } catch (err) {
       console.log(err)
     }
@@ -78,7 +77,6 @@ const PurchaseForm = ({balance, uid, refreshUser}) => {
       return <li key={`error-${i}`}>{error}</li>
     })
   }
-
   return (
   <>
     <form onSubmit={handleSubmitCheck}>

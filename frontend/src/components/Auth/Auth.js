@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, useCallback } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import firebase from "./firebase.js";
 import { setUpUser } from '../../util/util.js'
 
@@ -6,27 +6,26 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [user, setUser]= useState({})
- 
-  const refreshUser = useCallback(
-    async () => {
-      await firebase.auth().onAuthStateChanged(async (users)=>{
-            if (users) {
-              let userInfo =  await setUpUser(users.uid);
-            
-              setUser (userInfo)
-              users.info = user
-              setCurrentUser(users)
-            } else {
-              setCurrentUser(users)
-            }
-            
-          }); 
-    },[user]
-  )
+  const [ userI, setUser ] =useState({})
+  const refreshUser = async() => {
+    await firebase.auth().onAuthStateChanged(async (user)=>{
+      if (user) {
+        let userInfo =  await setUpUser(user.uid);
+        user.info = userInfo
+
+        setUser(userInfo)
+        setCurrentUser(user)
+
+      } else {
+        setCurrentUser(user)
+      }
+      
+    }); 
+  }
   useEffect(() => {
-    refreshUser()
-  }, [refreshUser]);
+    refreshUser();
+
+  },[]);
 
   return (
     <AuthContext.Provider
