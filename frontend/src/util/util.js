@@ -1,5 +1,6 @@
 import axios from 'axios';
 import firebase from '../components/Auth/firebase.js';
+const secret = require('../secret.json')
 
 export const setUpUser = async userId => {
   try {
@@ -11,3 +12,7 @@ export const setUpUser = async userId => {
     console.log (err);
   }
 };
+export const getTickerInfo = async ticker => {
+  let resp = await axios.get(`https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${secret.apiToken}`);
+  return resp
+}
