@@ -15,7 +15,7 @@ const App = () => {
       <Router>
       <div className='app'>
           <PrivateRoute path="/" component={Navbar} />
-          <PrivateRoute path="/transactions" component={Transactions} />
+          <PrivateRoute exact path="/transactions" component={Transactions} />
           <PrivateRoute exact path="/portfolio" component={Portfolio} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
