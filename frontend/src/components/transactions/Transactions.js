@@ -1,8 +1,9 @@
 import React, {useEffect,useState, useContext} from "react";
 import TransactionItem from './TransactionItem';
 import { getAllTransactions } from '../../util/util.js'
-
 import { AuthContext } from "../Auth/Auth.js";
+
+import '../../CSS/Transactions.css'
 
 
 const Transactions = () => {
@@ -23,10 +24,12 @@ const Transactions = () => {
       return <TransactionItem key={`${stonks.symbol}-${i}`}symbol={stonks.ticker_symbol} shares={stonks.shares} price={stonks.price}/>
     })
     return (
-      <>
+      <div id={"transactionsContainer"}>
+        <div id={'transactionsWrapper'}>
         <h1>Transactions</h1>
         {showTransactions}
-      </>
+      </div>
+      </div>
     )
   }else {
     return <h1>No Transactions Yet</h1>
