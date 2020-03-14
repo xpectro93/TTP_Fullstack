@@ -40,6 +40,7 @@ const SignUp = ({history}) => {
     <div className={"formDiv"}>
       
       <form onSubmit={handleSignUp}>
+          <h1 className={`logo`}>STONKS</h1>
           <h1>Sign up</h1>
           <input name="username" type='text' placeholder="Username"/>
           <input name="email" type="email" placeholder="Email" />

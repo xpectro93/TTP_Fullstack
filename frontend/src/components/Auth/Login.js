@@ -31,6 +31,7 @@ const Login = ({ history }) => {
       <div className={'formDiv'}>
         
         <form onSubmit={handleLogin}>
+            <h1 className={`logo`}>STONKS</h1>
             <h1>Log in</h1>
             <input name="email" type="email" placeholder="Email" autoComplete='off' />
             <input name="password" type="password" placeholder="Password" />

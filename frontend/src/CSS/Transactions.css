@@ -1,22 +1,29 @@
 #transactionsContainer {
   width:100%;
   height:80vh;
+  transition: all .5s ease-in-out;
 }
 #transactionsWrapper {
   width:70%;
   margin: auto;
+
+  transition: all .5s ease-in-out;
 }
 .transactionItem {
   display:flex;
   flex-direction: row;
+
+  transition: all .5s ease-in-out;
 }
 @media only screen and (max-width: 600px) {
   #transactionsWrapper {
     width:90%;
+    transition: all .5s ease-in-out;
   }
 }
 @media only screen and (max-width: 350px) {
   #transactionsWrapper {
     width:100%;
+    transition: all .5s ease-in-out;
   }
 }

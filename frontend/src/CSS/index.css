@@ -64,7 +64,7 @@ body {
 	background-color:#282C33;
 	color:white;
 
-	transition: all 2s ease-in-out;
+	transition: all .5s ease-in-out;
 }
 .app {
 	width:100%;
@@ -81,3 +81,9 @@ body {
   color:gray
 }
 
+a:visited {
+	color: #FEF854
+}
+a:active {
+	color:blue
+}
