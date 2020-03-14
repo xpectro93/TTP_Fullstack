@@ -3,7 +3,6 @@ import StockItem  from './StockItem.js'
 
 export const PortfolioList =({ portfolio}) => {
   let stonks = [];
- 
   for(const symbol in portfolio){
       const current = portfolio[symbol];
 
@@ -19,7 +18,7 @@ export const PortfolioList =({ portfolio}) => {
   }
 
   return stonks.length ? (
-    <div>
+    <div id={'portfolioList'}>
       {stonks}
     </div>
   ) : <h1>No stonks purchased yet</h1>

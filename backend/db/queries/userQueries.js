@@ -1,7 +1,6 @@
 const { one } = require('./index.js');
 
 const createUser =async ( req, res, next ) => {
-  console.log(req.body)
   try {
     const newUser = await one (
       'INSERT INTO users (uid, username, email) VALUES (${uid},${username},${email}) RETURNING *',req.body

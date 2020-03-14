@@ -4,6 +4,7 @@ import { AuthContext } from "../Auth/Auth.js";
 import { getAllTransactions , getSymbolPrices } from "../../util/util";
 import PurchaseForm from './PurchaseForm.js'
 import { PortfolioList } from './PortfolioList.js'
+import '../../CSS/Portfolio.css'
 
 
 
@@ -54,10 +55,10 @@ const Portfolio = () => {
   if(currentUser.info && currentUser.info.uid){
     return (
       <>
-    <h1>{currentUser.info.username}</h1>
-    <h2>{currentUser.info.email}</h2>
-    <PortfolioList portfolio={portfolio} />
-    <PurchaseForm balance={currentUser.info.balance} uid={currentUser.uid} refreshUser={refreshUser} />
+    <div className={'portfolioDiv'}>
+      <PortfolioList portfolio={portfolio} />
+      <PurchaseForm balance={currentUser.info.balance} uid={currentUser.uid} refreshUser={refreshUser} />
+    </div>
       </>
     )
   } else {

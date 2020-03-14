@@ -1,0 +1,16 @@
+.portfolioDiv{
+  background:red;
+  width:100%;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.portfolioDiv > div {
+  width:50%;
+}
+#portfolioList {
+  background: blue;
+}
+h1{
+  margin:0px;
+}

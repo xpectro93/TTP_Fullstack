@@ -20,4 +20,5 @@ CREATE TABLE transactions (
   price FLOAT NOT NULL
 );
 INSERT INTO users( uid, username, email) VALUES
-('vI3Tj9ezsKQndVheADeEcWgyB4F3','jon','jon@test.com');
+('vI3Tj9ezsKQndVheADeEcWgyB4F3','jon','jon@test.com'),
+('QAkumxe2UXQ9MW5vo9N4uyHevqY2','phoenix','phoenix@test.com');

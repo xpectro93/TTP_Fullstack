@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { useInput } from '../../util/customHooks.js'
 import { getTickerInfo , postNewTransaction } from '../../util/util.js'
 const PurchaseForm = ({balance, uid, refreshUser}) => {
-  const shares = useInput(0);
-  const tickerSymbol = useInput("aapl");
+  const shares = useInput('');
+  const tickerSymbol = useInput("");
   const [hasError, setHasError ] = useState(false);
   const [errorList, setErrorList ] = useState([])
 
@@ -97,7 +97,7 @@ const PurchaseForm = ({balance, uid, refreshUser}) => {
         />
       </label>
       { hasError ? <ul>{displayErrors()}</ul>: null }
-      <input type ={'submit'} />
+      <input type ={'submit'} value={`Buy`} />
     </form>
   </>)
 }

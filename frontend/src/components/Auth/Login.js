@@ -1,8 +1,9 @@
 import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
+import { Link } from 'react-router-dom';
 import firebase from "./firebase.js";
 import { AuthContext } from "./Auth.js";
-
+import '../../CSS/Auth.css'
 
 const Login = ({ history }) => {
   const handleLogin = useCallback(
@@ -27,16 +28,15 @@ const Login = ({ history }) => {
     return <Redirect to="/portfolio" />;
   }else if(currentUser === null) {
     return (
-      <div>
-        <h1>Log in</h1>
-        <form onSubmit={handleLogin}>
-          
-            <input name="email" type="email" placeholder="Email" autoComplete='off' />
-          
+      <div className={'formDiv'}>
         
+        <form onSubmit={handleLogin}>
+            <h1>Log in</h1>
+            <input name="email" type="email" placeholder="Email" autoComplete='off' />
             <input name="password" type="password" placeholder="Password" />
-          
           <button type="submit">Log in</button>
+          <h1>Not a member?</h1>
+          <Link to='/signup'>Register Here</Link>
         </form>
       </div>
     );

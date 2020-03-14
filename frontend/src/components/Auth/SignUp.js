@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react';
 import {withRouter} from 'react-router';
+import { Link } from 'react-router-dom';
 import firebase from './firebase.js';
 import axios from 'axios';
 const checkValues = (input1, input2) => input1.value === input2.value ? true : false
@@ -21,6 +22,7 @@ const SignUp = ({history}) => {
             username:username.value,
 
           })
+          console.log('WE GET HERE AND THEN WE DIE,', res)
           history.push ('/portfolio');
         }else{
           alert('Passwords did not match')
@@ -35,15 +37,19 @@ const SignUp = ({history}) => {
 
   
   return (
-    <div>
-      <h1>Sign up</h1>
+    <div className={"formDiv"}>
+      
       <form onSubmit={handleSignUp}>
-       
+          <h1>Sign up</h1>
           <input name="username" type='text' placeholder="Username"/>
           <input name="email" type="email" placeholder="Email" />
           <input name="password" type="password" placeholder="Password" />
           <input name="confirmPassword" type="password" placeholder="Confirm Password" />
         <button name='subBtn' type="submit">Sign Up</button>
+          <h1>Already a member?</h1>
+         <Link to='/login'>Log In</Link>
+  
+
       </form>
     </div>
   );
