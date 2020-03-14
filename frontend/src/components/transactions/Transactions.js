@@ -1,38 +1,27 @@
-import React, {useState, useEffect, useContext} from "react";
-import { Redirect } from 'react-router'
-import firebase from "../Auth/firebase";
+import React, {useEffect,useState, useContext} from "react";
+import { Redirect } from 'react-router';
+import { getAllTransactions } from '../../util/util.js'
+
 import { AuthContext } from "../Auth/Auth.js";
-import axios from 'axios';
-const secret = require('../../secret.json')
+
 
 const Transactions = () => {
   const { currentUser } = useContext(AuthContext);
-  let [ user, setUser ] = useState();
-
-  //retrieves current user from backend;
-  const getUser = async userId => {
-    let token = await firebase.auth().currentUser.getIdToken(false)
-    token = {token:token}
-    const userResponse = await axios.post(`/api/users/${userId}`, token);
-    console.log(userResponse)
-    setUser(userResponse.data.user)
-  }
-  const testApi = async ticker => {
-    let resp = await axios.get(`https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=${secret.apiToken}`);
-    console.log('thisker', resp)
-  }
-//keys of interest high, low,
+  const [ transations, setTransactions ] = useState([])
   useEffect(()=> {
-    getUser(currentUser.uid)
-    testApi('FNB')
+    const setUpTransactions =async () => {
+
+     let transactionsResponse = await getAllTransactions(currentUser.info.uid);
+     setTransactions(transactionsResponse)
+    }
+    setUpTransactions()
+
   },[currentUser])
-  if(user){
+  if(currentUser){
     return (
       <>
-        <h1>{user.username}</h1>
-        <h2>{user.uid}</h2>
-        <h2>{user.email}</h2>
-        <button onClick={() => firebase.auth().signOut()}>Sign out</button>
+        <h1>Transactions</h1>
+        
       </>
     )
   }else {

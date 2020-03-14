@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect} from "react";
 import { Redirect } from 'react-router'
-import firebase from "../Auth/firebase";
 import { AuthContext } from "../Auth/Auth.js";
 import { getAllTransactions , getSymbolPrices } from "../../util/util";
 import PurchaseForm from './PurchaseForm.js'
@@ -33,7 +32,6 @@ const Portfolio = () => {
       let latestPrices = await getSymbolPrices(arr);
       latestPrices.forEach(stock => {
         let currentKey = transactionObj[stock.data.symbol]
-        console.log(stock)
         currentKey['latestPrice'] = stock.data.latestPrice
         currentKey['open'] = stock.data.open
         
@@ -59,8 +57,6 @@ const Portfolio = () => {
     <h2>{currentUser.info.email}</h2>
     <PortfolioList portfolio={portfolio} />
     <PurchaseForm balance={currentUser.info.balance} uid={currentUser.uid} refreshUser={refreshUser} />
-
-    <button onClick={() => firebase.auth().signOut()}>Sign out</button>
       </>
     )
   } else {

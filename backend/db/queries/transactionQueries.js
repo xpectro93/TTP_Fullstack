@@ -30,12 +30,12 @@ const createTransaction = async (req, res, next) => {
     price: req.body.price,
   };
   try {
-    let first = await none ('UPDATE users SET balance = $1 WHERE uid = $2', [
+    await none ('UPDATE users SET balance = $1 WHERE uid = $2', [
       newBalance.balance,
       newBalance.uid
     ]);
    
-    let second = await none (
+     await none (
       'INSERT INTO transactions (uid, ticker_symbol, transaction_type, shares, price) VALUES (${uid},${ticker_symbol}, ${transaction_type}, ${shares}, ${price})',
       newTransaction
     );
