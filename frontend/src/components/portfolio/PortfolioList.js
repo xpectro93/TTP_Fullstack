@@ -1,14 +1,21 @@
-import React, { useEffect } from 'react';
-import { getSymbolPrices } from '../../util/util.js'
-//import helper function 
+import React from 'react';
+import StockItem  from './StockItem.js'
+
 export const PortfolioList =({ portfolio}) => {
   let stonks = [];
  
-    for(const symbol in portfolio){
-      let shares = portfolio[symbol]['shares'];
-      let price = portfolio[symbol]['price'];
-      let latestPrice = portfolio[symbol]['latestPrice']
-     stonks.push(<h1 key={symbol}>{symbol}:{shares} @ {price} {latestPrice}  </h1>)
+  for(const symbol in portfolio){
+      const current = portfolio[symbol];
+
+      const shares = current['shares'];
+      const latestPrice = current['latestPrice']
+      const open = current['open']
+     stonks.push(<StockItem key={symbol}
+                  open={open}
+                  latestPrice={latestPrice}
+                  symbol={symbol}
+                  shares={shares} 
+                  />)
   }
 
   return stonks.length ? (

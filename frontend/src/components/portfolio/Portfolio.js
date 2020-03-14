@@ -12,7 +12,7 @@ const Portfolio = () => {
   const { currentUser } = useContext(AuthContext);
   const { refreshUser } = useContext(AuthContext);
   const [portfolio , setPortfolio ] = useState({});
-  const [currentPrices, setCurrentPrices] = useState([]);
+
 
   const setUpTransactions = async () => {
     let transactionObj = {}
@@ -32,9 +32,13 @@ const Portfolio = () => {
       let arr = Object.keys(transactionObj);
       let latestPrices = await getSymbolPrices(arr);
       latestPrices.forEach(stock => {
-        transactionObj[stock.data.symbol]['latestPrice'] =stock.data.latestPrice
+        let currentKey = transactionObj[stock.data.symbol]
+        console.log(stock)
+        currentKey['latestPrice'] = stock.data.latestPrice
+        currentKey['open'] = stock.data.open
+        
       })
-      setCurrentPrices(latestPrices)
+
       setPortfolio(transactionObj)
     } catch (err) {
       console.log(err)
