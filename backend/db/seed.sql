@@ -1,9 +1,3 @@
-DROP DATABASE IF EXISTS stonks;
-CREATE DATABASE stonks;
-
-
-\c stonks;
-
 CREATE TABLE users (
   uid VARCHAR PRIMARY KEY,
   username VARCHAR NOT NULL UNIQUE,
@@ -20,5 +14,4 @@ CREATE TABLE transactions (
   price FLOAT NOT NULL
 );
 INSERT INTO users( uid, username, email) VALUES
-('vI3Tj9ezsKQndVheADeEcWgyB4F3','jon','jon@test.com'),
-('QAkumxe2UXQ9MW5vo9N4uyHevqY2','phoenix','phoenix@test.com');
+('8xwu1hiXkwhL0w8OLS4YfU8Rjj13','better','better@test.com');
