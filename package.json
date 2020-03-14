@@ -1,0 +1,22 @@
+{
+  "name": "TTP_Fullstack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./backend/app.js",
+    "heroku-postbuild": "cd backend && npm install && cd ../frontend && npm install --only=prod && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xpectro93/TTP_Fullstack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xpectro93/TTP_Fullstack/issues"
+  },
+  "homepage": "https://github.com/xpectro93/TTP_Fullstack#readme"
+}
