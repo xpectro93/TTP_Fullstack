@@ -61,7 +61,6 @@ const PurchaseForm = ({balance, uid, refreshUser}) => {
       shares: shares.value,
       price:info.price
     }
-    console.log(transactionObj)
     try {
        await postNewTransaction(transactionObj);
        await refreshUser()

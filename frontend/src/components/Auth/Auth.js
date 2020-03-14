@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
         user.info = userInfo
 
         setUser(userInfo)
+        userI.used = true
         setCurrentUser(user)
 
       } else {
@@ -23,9 +24,25 @@ export const AuthProvider = ({ children }) => {
     }); 
   }
   useEffect(() => {
+    const refreshUser = async() => {
+    await firebase.auth().onAuthStateChanged(async (user)=>{
+      if (user) {
+        let userInfo =  await setUpUser(user.uid);
+        user.info = userInfo
+
+        setUser(userInfo)
+        userI.used = true
+        setCurrentUser(user)
+
+      } else {
+        setCurrentUser(user)
+      }
+      
+    }); 
+  }
     refreshUser();
 
-  },[]);
+  },[userI.used]);
 
   return (
     <AuthContext.Provider

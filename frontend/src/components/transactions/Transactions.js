@@ -1,6 +1,5 @@
 import React, {useEffect,useState, useContext} from "react";
 import TransactionItem from './TransactionItem';
-import { Redirect } from 'react-router';
 import { getAllTransactions } from '../../util/util.js'
 
 import { AuthContext } from "../Auth/Auth.js";
@@ -9,14 +8,15 @@ import { AuthContext } from "../Auth/Auth.js";
 const Transactions = () => {
   const { currentUser } = useContext(AuthContext);
   const [ transactions, setTransactions ] = useState([])
-  const setUpTransactions = async () => {
-
-    let transactionsResponse = await getAllTransactions(currentUser.info.uid,);
-    setTransactions(transactionsResponse.data.transactions)
-   }
+ 
   useEffect(()=> {
-    setUpTransactions()
-  },[currentUser])
+    const setUpTransactions = async () => {
+
+      let transactionsResponse = await getAllTransactions(currentUser.info.uid);
+      setTransactions(transactionsResponse.data.transactions)
+     }
+     setUpTransactions()
+  },[currentUser.info.uid])
   if(transactions.length){
     let showTransactions = transactions.map( (stonks,i) => {
 
@@ -29,7 +29,7 @@ const Transactions = () => {
       </>
     )
   }else {
-    return <h1>WTF</h1>
+    return <h1>No Transactions Yet</h1>
   }
   
 };

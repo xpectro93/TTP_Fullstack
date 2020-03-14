@@ -44,7 +44,7 @@ const createTransaction = async (req, res, next) => {
       message: 'Created new transactions',
     });
   } catch (err) {
-    console.log('ERROR HAPPENS HERE =>', err)
+    
     next (err);
   }
 };

@@ -20,7 +20,6 @@ export const getTickerInfo = async ticker => {
 export const postNewTransaction = async newTransaction => {
   let token = await firebase.auth ().currentUser.getIdToken (false);
   newTransaction.token = {token: token};
-  console.log('new',newTransaction)
   return await axios.post(`api/transactions/new/${newTransaction.uid}`, newTransaction)
 }
 

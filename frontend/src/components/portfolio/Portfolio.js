@@ -13,43 +13,44 @@ const Portfolio = () => {
   const [portfolio , setPortfolio ] = useState({});
 
 
-  const setUpTransactions = async () => {
-    let transactionObj = {}
-    try {
-      let transactionList = await getAllTransactions(currentUser.info.uid);
-      transactionList.data.transactions.forEach(transaction => {
-        if(transactionObj[transaction.ticker_symbol]){
-          transactionObj[transaction.ticker_symbol]['shares']+= transaction.shares
-        }else {
-          transactionObj[transaction.ticker_symbol] = {
-            shares  :transaction.shares,
-            price:transaction.price
-          }
-        }
-        
-      });
-      let arr = Object.keys(transactionObj);
-      let latestPrices = await getSymbolPrices(arr);
-      latestPrices.forEach(stock => {
-        let currentKey = transactionObj[stock.data.symbol]
-        currentKey['latestPrice'] = stock.data.latestPrice
-        currentKey['open'] = stock.data.open
-        
-      })
-
-      setPortfolio(transactionObj)
-    } catch (err) {
-      console.log(err)
-    }
-    
-     
-  }
+ 
   
 
 
   useEffect(()=> {
-    setUpTransactions(currentUser.info.uid)
-  },[currentUser.info.balance])
+    const setUpTransactions = async () => {
+      let transactionObj = {}
+      try {
+        let transactionList = await getAllTransactions(currentUser.info.uid);
+        transactionList.data.transactions.forEach(transaction => {
+          if(transactionObj[transaction.ticker_symbol]){
+            transactionObj[transaction.ticker_symbol]['shares']+= transaction.shares
+          }else {
+            transactionObj[transaction.ticker_symbol] = {
+              shares  :transaction.shares,
+              price:transaction.price
+            }
+          }
+          
+        });
+        let arr = Object.keys(transactionObj);
+        let latestPrices = await getSymbolPrices(arr);
+        latestPrices.forEach(stock => {
+          let currentKey = transactionObj[stock.data.symbol]
+          currentKey['latestPrice'] = stock.data.latestPrice
+          currentKey['open'] = stock.data.open
+          
+        })
+  
+        setPortfolio(transactionObj)
+      } catch (err) {
+        console.log(err)
+      }
+      
+       
+    }
+    setUpTransactions()
+  },[currentUser.info.balance, currentUser.info.uid])
   if(currentUser.info && currentUser.info.uid){
     return (
       <>
