@@ -19,7 +19,11 @@ export const PortfolioList =({ portfolio}) => {
 
   return stonks.length ? (
     <div id={'portfolioList'}>
+      <div id={'stonksContainer'}>
       {stonks}
+      </div>
     </div>
-  ) : <h1>No stonks purchased yet</h1>
+  ) :(<div id={'portfolioList'}>
+      <h1>No Stocks Bought Yet</h1>
+    </div> )
 }

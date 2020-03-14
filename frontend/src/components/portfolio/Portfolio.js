@@ -13,11 +13,6 @@ const Portfolio = () => {
   const { refreshUser } = useContext(AuthContext);
   const [portfolio , setPortfolio ] = useState({});
 
-
- 
-  
-
-
   useEffect(()=> {
     const setUpTransactions = async () => {
       let transactionObj = {}

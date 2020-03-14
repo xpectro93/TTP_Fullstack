@@ -78,27 +78,23 @@ const PurchaseForm = ({balance, uid, refreshUser}) => {
   }
   return (
   <>
+    <div>
     <form onSubmit={handleSubmitCheck}>
       <h1>Cash: {balance}</h1>
-      <label>
-          Ticker Symbol
           <input 
             type="text"
-            placeholder="Ticker"
+            placeholder="Enter Ticker Symbol"
             {...tickerSymbol}
           />
-      </label>
-      <label>
-        Quantity
         <input 
           type="text"
-          placeholder="Qty"
+          placeholder="Enter Quantity"
           {...shares}
         />
-      </label>
       { hasError ? <ul>{displayErrors()}</ul>: null }
       <input type ={'submit'} value={`Buy`} />
     </form>
+    </div>
   </>)
 }
 

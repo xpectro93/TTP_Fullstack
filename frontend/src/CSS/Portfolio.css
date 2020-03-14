@@ -1,6 +1,7 @@
 .portfolioDiv{
   background:red;
   width:100%;
+  height:80%;
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -8,9 +9,52 @@
 .portfolioDiv > div {
   width:50%;
 }
-#portfolioList {
+.portfolioList {
   background: blue;
+}
+#stonksContainer {
+  width:90%;
+  margin:10px auto;
+}
+.stock-item {
+  display:flex;
+  width:90%;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 2px solid plum;
+}
+.stock-item > h2 {
+	justify-content: space-around;
+	margin:5px;
+	
 }
 h1{
   margin:0px;
+  text-align: center;
+}
+@media only screen and (max-width: 600px) {
+
+  .portfolioDiv > div {
+    width:100%;
+  }
+  form > input, button,a {
+    width:70%;
+    margin:5px auto;
+    
+  }
+  h1,h2 {
+    font-size: 20px;
+  } 
+}
+
+@media only screen and (max-width: 600px) {
+  #stonksContainer {
+    width:100%;
+  margin:5px auto;
+  }
+  .stock-item {
+    width:100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
