@@ -29,3 +29,14 @@ export const getAllTransactions = async uid => {
   token = {token: token};
   return await axios.post(`api/transactions/${uid}`,token)
 }
+
+export const getSymbolPrices = (symbolArr) => {
+  let promises = [];
+  symbolArr.forEach(symbol => {
+    let req = axios({
+      url: `https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${secret.apiToken}`
+    })
+    promises.push(req)
+  })
+  return Promise.all(promises)
+}

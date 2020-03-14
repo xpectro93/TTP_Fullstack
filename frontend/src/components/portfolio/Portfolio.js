@@ -2,19 +2,22 @@ import React, { useContext, useState, useEffect} from "react";
 import { Redirect } from 'react-router'
 import firebase from "../Auth/firebase";
 import { AuthContext } from "../Auth/Auth.js";
-import { getAllTransactions } from "../../util/util";
+import { getAllTransactions , getSymbolPrices } from "../../util/util";
 import PurchaseForm from './PurchaseForm.js'
+import { PortfolioList } from './PortfolioList.js'
 
 
 
 const Portfolio = () => {
   const { currentUser } = useContext(AuthContext);
   const { refreshUser } = useContext(AuthContext);
-  const [portfolio , setPortfolio ] = useState([]);
+  const [portfolio , setPortfolio ] = useState({});
+  const [currentPrices, setCurrentPrices] = useState([]);
 
   const setUpTransactions = async () => {
-    let transactionList = await getAllTransactions(currentUser.info.uid);
     let transactionObj = {}
+    try {
+      let transactionList = await getAllTransactions(currentUser.info.uid);
       transactionList.data.transactions.forEach(transaction => {
         if(transactionObj[transaction.ticker_symbol]){
           transactionObj[transaction.ticker_symbol]['shares']+= transaction.shares
@@ -26,9 +29,20 @@ const Portfolio = () => {
         }
         
       });
+      let arr = Object.keys(transactionObj);
+      let latestPrices = await getSymbolPrices(arr);
+      latestPrices.forEach(stock => {
+        transactionObj[stock.data.symbol]['latestPrice'] =stock.data.latestPrice
+      })
+      setCurrentPrices(latestPrices)
       setPortfolio(transactionObj)
-
+    } catch (err) {
+      console.log(err)
+    }
+    
+     
   }
+  
 
 
   useEffect(()=> {
@@ -39,7 +53,9 @@ const Portfolio = () => {
       <>
     <h1>{currentUser.info.username}</h1>
     <h2>{currentUser.info.email}</h2>
+    <PortfolioList portfolio={portfolio} />
     <PurchaseForm balance={currentUser.info.balance} uid={currentUser.uid} refreshUser={refreshUser} />
+
     <button onClick={() => firebase.auth().signOut()}>Sign out</button>
       </>
     )
