@@ -22,7 +22,9 @@ app.use(express.static(path.join(__dirname, "../frontend/build")))
 app.use('/api/', index);
 app.use('/api/users', users);
 app.use('/api/transactions', transactions);
-
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
 
 //error handling;
 app.use((err, req, res, next) => {
