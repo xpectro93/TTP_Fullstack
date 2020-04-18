@@ -22,7 +22,6 @@ const SignUp = ({history}) => {
             username:username.value,
 
           })
-          console.log('WE GET HERE AND THEN WE DIE,', res)
           history.push ('/portfolio');
         }else{
           alert('Passwords did not match')

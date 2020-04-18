@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [ userI, setUser ] =useState({})
+  const [ userI, setUser ] =useState({used:false})
   const refreshUser = async() => {
     await firebase.auth().onAuthStateChanged(async (user)=>{
       if (user) {
@@ -40,8 +40,9 @@ export const AuthProvider = ({ children }) => {
       
     }); 
   }
-    refreshUser();
 
+    refreshUser();
+console.log('fires')
   },[userI.used]);
 
   return (
