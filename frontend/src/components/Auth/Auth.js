@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState, createContext, useCallback } from "react";
 import firebase from "./firebase.js";
 import { setUpUser } from '../../util/util.js'
 
@@ -6,50 +6,47 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [ userI, setUser ] =useState({used:false})
-  const refreshUser = async() => {
-    await firebase.auth().onAuthStateChanged(async (user)=>{
-      if (user) {
+  const [ update, setUpdate] = useState(0);
+  const refreshUser = useCallback(() => {
+    firebase.auth().onAuthStateChanged(async (user)=>{
+      try {
         let userInfo =  await setUpUser(user.uid);
         user.info = userInfo
-
-        setUser(userInfo)
-        userI.used = true
-        setCurrentUser(user)
-
-      } else {
-        setCurrentUser(user)
+        setUpdate(prev => prev + 1);
+        setCurrentUser(user);
+      } catch (err) {
+        setCurrentUser(null);
+        console.log(err,update);
       }
+        
       
     }); 
-  }
+  },[update])
   useEffect(() => {
-    const refreshUser = async() => {
-    await firebase.auth().onAuthStateChanged(async (user)=>{
-      if (user) {
-        let userInfo =  await setUpUser(user.uid);
-        user.info = userInfo
-
-        setUser(userInfo)
-        userI.used = true
-        setCurrentUser(user)
-
-      } else {
-        setCurrentUser(user)
+    firebase.auth().onAuthStateChanged(async (user)=>{
+      if(user){
+        try {
+          let userInfo =  await setUpUser(user.uid);
+          user.info = userInfo
+          setCurrentUser(user);
+        } catch (err) {
+          setCurrentUser(null);
+          console.log(err);
+        }
+      }else {
+        setCurrentUser(null);
       }
       
-    }); 
-  }
-
-    refreshUser();
-console.log('fires')
-  },[userI.used]);
+        
+      
+    });
+    console.log('sdf')
+  },[]);
 
   return (
     <AuthContext.Provider
       value={{
-        currentUser,
-        refreshUser
+        currentUser, refreshUser
       }}
     >
       {children}

@@ -10,7 +10,7 @@ import '../../CSS/Portfolio.css'
 
 const Portfolio = () => {
   const { currentUser } = useContext(AuthContext);
-  const { refreshUser } = useContext(AuthContext);
+
   const [portfolio , setPortfolio ] = useState({});
 
   useEffect(()=> {
@@ -52,7 +52,7 @@ const Portfolio = () => {
       <>
     <div className={'portfolioDiv'}>
       <PortfolioList portfolio={portfolio} />
-      <PurchaseForm balance={currentUser.info.balance} uid={currentUser.uid} refreshUser={refreshUser} />
+      <PurchaseForm balance={currentUser.info.balance} uid={currentUser.uid} />
     </div>
       </>
     )

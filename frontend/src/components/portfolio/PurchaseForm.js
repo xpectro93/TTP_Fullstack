@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { useInput } from '../../util/customHooks.js'
 import { getTickerInfo , postNewTransaction } from '../../util/util.js'
-const PurchaseForm = ({balance, uid, refreshUser}) => {
+import { AuthContext } from '../Auth/Auth.js'
+const PurchaseForm = ({balance, uid}) => {
+  const { refreshUser, currentUser } = useContext(AuthContext);
   const shares = useInput('');
   const tickerSymbol = useInput("");
   const [hasError, setHasError ] = useState(false);
@@ -76,6 +78,9 @@ const PurchaseForm = ({balance, uid, refreshUser}) => {
       return <li key={`error-${i}`}>{error}</li>
     })
   }
+  useEffect(()=> {
+
+  },[currentUser])
   return (
   <>
     <div>

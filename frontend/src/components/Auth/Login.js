@@ -21,9 +21,7 @@ const Login = ({ history }) => {
     }
     ,[history]
   );
-
   const { currentUser } = useContext(AuthContext);
-
   if (currentUser) {
     return <Redirect to="/portfolio" />;
   }else if(currentUser === null) {
