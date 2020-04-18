@@ -40,7 +40,6 @@ export const AuthProvider = ({ children }) => {
         
       
     });
-    console.log('sdf')
   },[]);
 
   return (
