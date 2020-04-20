@@ -40,7 +40,8 @@ const Portfolio = () => {
   
         setPortfolio(transactionObj)
       } catch (err) {
-        console.log(err)
+        window.location.reload();
+        console.log(err);
       }
       
        

@@ -28,7 +28,8 @@ const SignUp = ({history}) => {
         }
 
       } catch (error) {
-        alert (error);
+        window.location.reload();
+        console.log(error);
       }
     },
     [history]

@@ -16,7 +16,7 @@ const Login = ({ history }) => {
           .signInWithEmailAndPassword(email.value, password.value);
         history.push("/portfolio");
       } catch (error) {
-        alert(error);
+        console.log(error);
       }
     }
     ,[history]
