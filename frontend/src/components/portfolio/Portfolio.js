@@ -9,7 +9,7 @@ import '../../CSS/Portfolio.css'
 
 
 const Portfolio = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, update } = useContext(AuthContext);
 
   const [portfolio , setPortfolio ] = useState({});
 
@@ -46,7 +46,8 @@ const Portfolio = () => {
        
     }
     setUpTransactions()
-  },[currentUser.info.balance, currentUser.info.uid])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[update])
   if(currentUser.info && currentUser.info.uid){
     return (
       <>
