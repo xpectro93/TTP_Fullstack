@@ -5,6 +5,10 @@ import firebase from "./firebase.js";
 import { AuthContext } from "./Auth.js";
 import '../../CSS/Auth.css'
 
+
+import { TextField } from '@material-ui/core';
+
+
 const Login = ({ history }) => {
   const handleLogin = useCallback(
     async event => {
@@ -31,8 +35,8 @@ const Login = ({ history }) => {
         <form onSubmit={handleLogin}>
             <h1 className={`logo`}>STONKS</h1>
             <h1>Log in</h1>
-            <input name="email" type="email" placeholder="Email" autoComplete='off' />
-            <input name="password" type="password" placeholder="Password" />
+            <TextField name="email" type="email" placeholder="Email" autoComplete='off' id="outlined-basic" label="Email" variant="filled" />
+            <TextField name="password" type="password" placeholder="Password" id="outlined-basic" label="Password" variant="filled" />
           <button type="submit">Log in</button>
           <h1>Not a member?</h1>
           <Link to='/signup'>Register Here</Link>

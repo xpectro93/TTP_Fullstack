@@ -54,9 +54,11 @@ h1,h2,h3 {
 input:focus {outline:none;}
 input, button {
 	text-align: center;
-	font-size: 15px;
-	border-radius: 25px;
+	font-size: 25px;
+	border-radius: 5px;
 	height:25px;
+	border-color: #303f9f;
+	height:35px;
 }
 body {
 	font-family: sans-serif;
@@ -80,10 +82,5 @@ body {
 .gray {
   color:gray
 }
-/* 
-a:visited {
-	color: #FEF854
-}
-a:active {
-	color:blue
-} */
+
+

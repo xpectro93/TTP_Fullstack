@@ -1,8 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { useInput } from '../../util/customHooks.js'
 import { getTickerInfo , postNewTransaction } from '../../util/util.js'
-
-import { Button } from '@material-ui/core';
+//import 
 import { TextField } from '@material-ui/core';
 
 

@@ -1,7 +1,7 @@
 .formDiv {
   display: flex;
   flex-direction: column;
-  width:80%;
+  width:70%;
   height:80%;
   margin:10% auto;
 
@@ -10,7 +10,7 @@
 form {
   display:flex;
   flex-direction: column;
-  margin:10%
+  margin:10%;
 }
 form > input, button,a {
   width:70%;
@@ -51,6 +51,9 @@ nav > div {
     height:80%;
     margin:5% auto;
   }
+  .logoutbtn {
+    font-size:14px
+  }
 
 }
 .logo{
@@ -62,11 +65,12 @@ nav > div {
 @media only screen and (max-width: 350px) {
   .formDiv {
     width:100%;
-    /* height:80%; */
     margin:5% auto;
   }
   form {
     margin:2.5% 
   }
-
+  .logoutbtn {
+    font-size:11px
+  }
 }

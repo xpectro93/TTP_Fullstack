@@ -3,6 +3,9 @@ import {withRouter} from 'react-router';
 import { Link } from 'react-router-dom';
 import firebase from './firebase.js';
 import axios from 'axios';
+
+import { TextField } from '@material-ui/core';
+
 const checkValues = (input1, input2) => input1.value === input2.value ? true : false
 const SignUp = ({history}) => {
   
@@ -42,10 +45,14 @@ const SignUp = ({history}) => {
       <form onSubmit={handleSignUp}>
           <h1 className={`logo`}>STONKS</h1>
           <h1>Sign up</h1>
-          <input name="username" type='text' placeholder="Username"/>
-          <input name="email" type="email" placeholder="Email" />
-          <input name="password" type="password" placeholder="Password" />
-          <input name="confirmPassword" type="password" placeholder="Confirm Password" />
+          <TextField name="username" type="text" placeholder="Username" autoComplete='off' id="outlined-basic" label="Username" variant="filled" />
+
+          <TextField name="email" type="email" placeholder="Email" autoComplete='off' id="outlined-basic" label="Email" variant="filled" />
+
+          <TextField name="password" type="password" placeholder="Password" autoComplete='off' id="outlined-basic" label="Password" variant="filled" />
+
+          <TextField name="confirmPassword" type="password" placeholder="Confirm Password" autoComplete='off' id="outlined-basic" label=" Confirm Password" variant="filled" />
+
         <button name='subBtn' type="submit">Sign Up</button>
           <h1>Already a member?</h1>
          <Link to='/login'>Log In</Link>
