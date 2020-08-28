@@ -55,15 +55,15 @@ input:focus {outline:none;}
 input, button {
 	text-align: center;
 	font-size: 15px;
-	border-radius: 5px;
+	border-radius: 25px;
+	height:25px;
 }
 body {
 	font-family: sans-serif;
 	width:100%;
 	height:100vh;
-	background-color:#282C33;
-	color:white;
-
+	background-color:#E3E2DE;
+	color:#282C33;
 	transition: all .5s ease-in-out;
 }
 .app {
@@ -80,10 +80,10 @@ body {
 .gray {
   color:gray
 }
-
+/* 
 a:visited {
 	color: #FEF854
 }
 a:active {
 	color:blue
-}
+} */

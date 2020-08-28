@@ -3,6 +3,7 @@ import { useInput } from '../../util/customHooks.js'
 import { getTickerInfo , postNewTransaction } from '../../util/util.js'
 
 import { Button } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 
 import { AuthContext } from '../Auth/Auth.js'
@@ -87,20 +88,28 @@ const PurchaseForm = ({balance, uid}) => {
   },[currentUser])
   return (
   <>
-    <div>
+    <div className="container">
     <form onSubmit={handleSubmitCheck}>
       <h1>Cash: {balance}</h1>
-          <input 
+          {/* <input 
             type="text"
             placeholder="Enter Ticker Symbol"
             {...tickerSymbol}
-          />
-        <input 
+          /> */}
+          <TextField  {...tickerSymbol} id="outlined-basic" label="Enter Ticker Symbol" variant="filled" />
+
+
+        {/* <input 
           type="text"
           placeholder="Enter Quantity"
           {...shares}
-        />
+        /> */}
+      
+
+      <TextField {...shares} id="outlined-basic" label="Enter Quantity" variant="filled" />
+
       { hasError ? <ul>{displayErrors()}</ul>: null }
+      {/* <Button color="secondary" type={"submit"} value={`Buy`}>Buy </Button> */}
       <input type ={'submit'} value={`Buy`} />
     </form>
     </div>
