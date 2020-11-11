@@ -21,6 +21,7 @@ const PurchaseForm = ({balance, uid}) => {
     try {
       setHasError(false)
       let info = await getTickerInfo(tickerSymbol.value);
+      console.log('this is info', info)
       // check if number
       if(isNaN(shares.value)){
         errorArray.push("Enter a  number")
@@ -69,7 +70,10 @@ const PurchaseForm = ({balance, uid}) => {
     }
     try {
        await postNewTransaction(transactionObj);
-       await refreshUser()
+       await refreshUser();
+       tickerSymbol.setValue("")
+       shares.setValue(0)
+
     } catch (err) {
       console.log(err)
     }
