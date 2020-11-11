@@ -25,6 +25,7 @@ const Login = ({ history }) => {
     }
     ,[history]
   );
+  console.log(process.env.REACT_APP_NOT_SECRET_CODE)
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
     return <Redirect to="/portfolio" />;
@@ -35,8 +36,8 @@ const Login = ({ history }) => {
         <form onSubmit={handleLogin}>
             <h1 className={`logo`}>STONKS</h1>
             <h1>Log in</h1>
-            <TextField name="email" type="email" placeholder="Email" autoComplete='off' id="outlined-basic" label="Email" variant="filled" />
-            <TextField name="password" type="password" placeholder="Password" id="outlined-basic" label="Password" variant="filled" />
+            <TextField name="email" type="email" placeholder="Email" autoComplete='off' label="Email" variant="filled" />
+            <TextField name="password" type="password" placeholder="Password" label="Password" variant="filled" />
           <button type="submit">Log in</button>
           <h1>Not a member?</h1>
           <Link to='/signup'>Register Here</Link>
@@ -44,7 +45,7 @@ const Login = ({ history }) => {
       </div>
     );
   } else {
-    return <h1> Loading</h1>
+    return <h1> Loading </h1>
   }
  
 };
