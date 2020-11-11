@@ -90,25 +90,14 @@ const PurchaseForm = ({balance, uid}) => {
     <div className="container">
     <form onSubmit={handleSubmitCheck}>
       <h1>Cash: {balance}</h1>
-          {/* <input 
-            type="text"
-            placeholder="Enter Ticker Symbol"
-            {...tickerSymbol}
-          /> */}
+
           <TextField  {...tickerSymbol} id="outlined-basic" label="Enter Ticker Symbol" variant="filled" />
 
-
-        {/* <input 
-          type="text"
-          placeholder="Enter Quantity"
-          {...shares}
-        /> */}
       
-
-      <TextField {...shares} id="outlined-basic" label="Enter Quantity" variant="filled" />
+        <TextField {...shares} id="outlined-basic" label="Enter Quantity" variant="filled" />
 
       { hasError ? <ul>{displayErrors()}</ul>: null }
-      {/* <Button color="secondary" type={"submit"} value={`Buy`}>Buy </Button> */}
+
       <input type ={'submit'} value={`Buy`} />
     </form>
     </div>
